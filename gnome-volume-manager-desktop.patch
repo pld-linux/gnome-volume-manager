@@ -6,7 +6,7 @@ diff -urN aa/gnome-volume-manager-0.9.2/gnome-volume-properties.desktop.in gnome
  Terminal=false
  Type=Application
 -Categories=Application;Settings;
-+Categories=GTK;GNOME;Settings;
++Categories=GTK;GNOME;Settings;X-Capplet;
  OnlyShowIn=GNOME;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=gnome-volume-manager
