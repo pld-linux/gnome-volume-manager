@@ -10,10 +10,10 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/1.2/%{name}
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-mount-argument.patch
 URL:		http://www.gnome.org/
+BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.23
-BuildRequires:	GConf2-devel
 BuildRequires:	hal-devel >= 0.4.7
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 2.5.1
