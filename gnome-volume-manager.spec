@@ -7,7 +7,6 @@ License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/1.2/%{name}-%{version}.tar.bz2
 # Source0-md5:	115433f785e854c36988dda31c8af8ee
-Source1:	%{name}-magicdev-wrapper
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-mount-argument.patch
 URL:		http://www.gnome.org/
@@ -24,8 +23,6 @@ BuildRequires:	pkgconfig
 Requires(post):	GConf2
 Requires:	dbus >= 0.23
 Requires:	hal >= 0.4.7
-Obsoletes:	magicdev
-Provides:	magicdev
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -67,8 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/magicdev
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
