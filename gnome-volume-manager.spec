@@ -2,11 +2,12 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.0.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/1.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	d5801767ad80e082de6e13118a0712a0
+Source1:	%{name}-magicdev-wrapper
 Patch0:		%{name}-desktop.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
@@ -60,6 +61,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome/capplets
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/magicdev
 
 mv $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*.desktop \
 	$RPM_BUILD_ROOT%{_datadir}/gnome/capplets
