@@ -1,14 +1,13 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	0.9.9
+Version:	0.9.10
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.9/%{name}-%{version}.tar.bz2
-# Source0-md5:	a0a6acf92fcefa8bf0376e690d233bbc
-Patch0:		%{name}-locale-names.patch
-Patch1:		%{name}-desktop.patch
+# Source0-md5:	816db601546249cc453e7a39bd6e1bdd
+Patch0:		%{name}-desktop.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -20,7 +19,7 @@ BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.4.0
 Requires(post):	GConf2
 Requires:	dbus >= 0.20
-Requires:	hal >= 0.2.91
+Requires:	hal >= 0.2.97
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,9 +41,6 @@ dzia³a w przestrzeni u¿ytkownika.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-
-mv po/{no,nb}.po
 
 %build
 %{__aclocal}
@@ -65,6 +61,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/gnome/capplets
 
 mv $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*.desktop \
 	$RPM_BUILD_ROOT%{_datadir}/gnome/capplets
+
+rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
 
