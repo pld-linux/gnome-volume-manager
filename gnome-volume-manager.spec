@@ -1,12 +1,12 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	1.0.2
-Release:	4
-License:	GPL
+Version:	1.0.3
+Release:	1
+License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/1.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	d5801767ad80e082de6e13118a0712a0
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.0/%{name}-%{version}.tar.bz2
+# Source0-md5:	a6987039afb1b22c981239913ed80d36
 Source1:	%{name}-magicdev-wrapper
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-mount-argument.patch
@@ -19,6 +19,7 @@ BuildRequires:	hal-devel >= 0.2.98
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.4.0
+BuildRequires:	pkgconfig
 Requires(post):	GConf2
 Requires:	dbus >= 0.22
 Requires:	hal >= 0.2.98
@@ -53,7 +54,6 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__automake}
 %configure \
 	--disable-schemas-install
-
 %{__make}
 
 %install
