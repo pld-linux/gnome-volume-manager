@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# This is a compatibility wrapper script to start gnome-volume-manager
+# for users who previously used magicdev.  This script will be invoked
+# automatically by the session manager until the user saves his/her
+# session.
+exec gnome-volume-manager $*
