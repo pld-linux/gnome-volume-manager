@@ -21,6 +21,7 @@ BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.196
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.23
 Requires:	hal >= 0.4.7
