@@ -14,12 +14,13 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.20
-BuildRequires:	hal-devel >= 0.2.6
+BuildRequires:	hal-devel >= 0.2.91
+BuildRequires:	intltool >= 0.28
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.4.0
 Requires(post):	GConf2
 Requires:	dbus >= 0.20
-Requires:	hal >= 0.2.6
+Requires:	hal >= 0.2.91
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
