@@ -1,5 +1,5 @@
 Summary:	The GNOME Volume Manager
-Summary(pl):	Menad¿er woluminów dla GNOME
+Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	0.8.2
 Release:	1
@@ -30,12 +30,12 @@ automatically import photos from a digital camera. The GNOME Volume
 Manager does this entirely in user-space and without polling.
 
 %description -l pl
-Menad¿er Voluminów dla GNOME monitoruje zdarzenia zwi±zane z
-woluminami i reaguje na nie zgodnie z polityk± zadan± przez
+Zarz±dca woluminów dla GNOME monitoruje zdarzenia zwi±zane z
+woluminami i reaguje na nie zgodnie z polityk± okre¶lon± przez
 u¿ytkownika. Program ten potrafi automatycznie montowaæ urz±dzenia
-hotplug oraz no¶niki wymienialne, odgrywaæ p³yty audio, czy DVD, a
-tak¿e automatycznie importowaæ zdjêcia z aparatu cyfrowego. Menad¿er
-ten dzia³a w przestrzeni u¿ytkownika.
+hotplug oraz no¶niki wymienne, odtwarzaæ p³yty audio, czy DVD, a tak¿e
+automatycznie importowaæ zdjêcia z aparatu cyfrowego. Zarz±dca ten
+dzia³a w przestrzeni u¿ytkownika.
 
 %prep
 %setup -q
