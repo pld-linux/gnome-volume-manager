@@ -2,7 +2,7 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.2.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.2/%{name}-%{version}.tar.bz2
@@ -21,7 +21,7 @@ BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.196
+BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.23
 Requires:	hal >= 0.4.7
@@ -50,9 +50,9 @@ dzia³a w przestrzeni u¿ytkownika.
 %patch2 -p1
 
 %build
-glib-gettextize --copy --force
+%{__glib_gettextize}
 %{__libtoolize}
-intltoolize --copy --force
+%{__intltoolize}
 %{__aclocal}
 %{__autoheader}
 %{__autoconf}
@@ -76,12 +76,10 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install /etc/gconf/schemas/gnome-volume-manager.schemas
+%gconf_schema_install gnome-volume-manager.schemas
 
 %preun
-if [ $1 = 0 ]; then
-	%gconf_schema_uninstall /etc/gconf/schemas/gnome-volume-manager.schemas
-fi
+%gconf_schema_uninstall gnome-volume-manager.schemas
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
