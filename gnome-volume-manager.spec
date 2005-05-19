@@ -5,7 +5,7 @@ Version:	1.3.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.2/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.3/%{name}-%{version}.tar.gz
 # Source0-md5:	a99afd4467be36038e3e9aae5939b071
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-mount-argument.patch
