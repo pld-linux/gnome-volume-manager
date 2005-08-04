@@ -1,0 +1,116 @@
+diff -ruN gnome-volume-manager-1.3.2-old/src/manager.c gnome-volume-manager-1.3.2/src/manager.c
+--- gnome-volume-manager-1.3.2-old/src/manager.c	2005-06-30 22:12:29.000000000 +0200
++++ gnome-volume-manager-1.3.2/src/manager.c	2005-07-04 14:43:15.822243984 +0200
+@@ -48,7 +48,8 @@
+ #define NAUTILUS_COMMAND	 BIN_NAUTILUS" -n --no-desktop %m"
+ 
+ static struct gvm_configuration config;
+-static LibHalContext *hal_ctx;
++static LibHalContext *hal_ctx = NULL;
++static DBusConnection *dbus_connection = NULL;
+ 
+ #ifndef ASSUME_SUBMOUNT
+ /** List of UDI's for volumes mounted by g-v-m that we need to apply policy to*/
+@@ -1332,6 +1333,73 @@
+ {
+ }
+ 
++static LibHalContext * gvm_do_hal_init ();
++
++/** Invoked by gvm_do_filter_dbus_msg in response to a D-BUS disconnect event.
++ *
++ * @param  data                 Context pointer
++ * @return true if it should be tried again, false if success or failure.
++ */
++static gboolean
++gvm_reconnect_to_hal (gpointer data __attribute__((__unused__)))
++{
++       static unsigned int retries = 0;
++       DBusError error;
++
++       dbg ("Trying a reconnect ...\n");
++       hal_ctx = gvm_do_hal_init ();
++       if (hal_ctx != NULL) {
++               dbg ("Reconnected OK.\n");
++               retries = 0;
++               return FALSE;
++       } else if (dbus_connection){
++               /* shut down dbus connection to try it again */
++               dbus_connection_unref (dbus_connection);
++               dbus_connection = NULL;
++       }
++
++       /* Retry later if it failed. */
++       if (retries++ < 100)
++               return TRUE;
++
++       /* Too many retries; clean up and bail. */
++       warn("gvm_reconnect_to_hal: no reconnection after 100 retries, exiting\n");
++       libhal_ctx_shutdown (hal_ctx, &error);
++       libhal_ctx_free (hal_ctx);
++       hal_ctx = NULL;
++       gtk_main_quit ();
++       return FALSE;
++}
++
++/** Invoked by D-BUS to filter messages.
++ *
++ * @param  connection  D-BUS connection
++ * @param  message     D-BUS message
++ * @param  user_data   Context pointer
++ */
++static DBusHandlerResult
++gvm_do_filter_dbus_msg (DBusConnection *connection __attribute__((__unused__)),
++                        DBusMessage *message,
++                        void *user_data __attribute__((__unused__)))
++{
++       DBusError error;
++       
++       if (dbus_message_is_signal (message,
++                                   DBUS_INTERFACE_LOCAL,
++                                   "Disconnected")) {
++               dbg("gvm_do_filter_dbus_msg: received Disconnected message\n");
++               g_timeout_add(500, gvm_reconnect_to_hal, NULL);
++               libhal_ctx_shutdown (hal_ctx, &error);
++               libhal_ctx_free (hal_ctx);
++               hal_ctx = NULL;
++               dbus_connection_unref (dbus_connection);
++               dbus_connection = NULL;
++               return DBUS_HANDLER_RESULT_HANDLED;
++       }
++       else
++               return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
++}
++
+ /** Integrate a dbus mainloop. 
+  *
+  *  @param  ctx                 LibHal context
+@@ -1342,14 +1410,15 @@
+ static dbus_bool_t 
+ hal_mainloop_integration (LibHalContext *ctx, DBusError *error)
+ {
+-	DBusConnection *dbus_connection;
+-
+ 	dbus_connection = dbus_bus_get (DBUS_BUS_SYSTEM, error);
+ 
+ 	if (dbus_error_is_set (error))
+ 		return FALSE;
++
++        dbus_connection_set_exit_on_disconnect (dbus_connection, FALSE);
+ 	
+         dbus_connection_setup_with_g_main (dbus_connection, NULL);
++        dbus_connection_add_filter (dbus_connection, gvm_do_filter_dbus_msg, NULL, NULL);
+ 
+ 	libhal_ctx_set_dbus_connection (ctx, dbus_connection);
+ 	
+@@ -1492,6 +1561,10 @@
+ 	DBusError error;
+ 	GSList *l;
+ 	
++        if (ctx == NULL) {
++            warn("unmount_all: No hal connection! can't unmount volumes\n");
++            return;
++        }
+ 	dbg ("unmounting all volumes that we saw mounted in our life\n");
+ 	dbus_error_init (&error);
+ 	for (l = all_mounted_volumes; l != NULL; l = g_slist_next (l)) {
