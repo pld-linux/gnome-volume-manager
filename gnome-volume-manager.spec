@@ -23,6 +23,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.31
+Requires:	eject
 Requires:	hal >= 0.5.3-1
 Requires:	pmount
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
