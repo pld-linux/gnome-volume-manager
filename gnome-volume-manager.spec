@@ -25,7 +25,6 @@ Requires(post,preun):	GConf2
 Requires:	dbus >= 0.31
 Requires:	eject
 Requires:	hal >= 0.5.3-1
-Requires:	pmount
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,8 +59,6 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__automake}
 %configure \
 	--disable-schemas-install \
-	--with-mount-command="/usr/bin/pmount-hal %h" \
-	--with-unmount-command="/usr/bin/pumount %d"
 %{__make}
 
 %install
@@ -90,4 +87,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
-%{_sysconfdir}/gconf/schemas/*
+%{_sysconfdir}/gconf/schemas/gnome-volume-manager.schemas
