@@ -2,13 +2,15 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.3.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.3/%{name}-%{version}.tar.gz
 # Source0-md5:	85582b7bae862cffc72fa69098d5053c
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-less_verbose.patch
+Patch2:		%{name}-nonmountable_media.patch
+Patch3:		%{name}-reconnect_on_dbus_exit.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -48,6 +50,8 @@ dzia³a w przestrzeni u¿ytkownika.
 %patch0 -p1
 # patch1 disabled until stable release
 #%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -58,7 +62,7 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-schemas-install \
+	--disable-schemas-install
 %{__make}
 
 %install
