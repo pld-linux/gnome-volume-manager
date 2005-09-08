@@ -1,31 +1,32 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	1.4.0
+Version:	1.5.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.4/%{name}-%{version}.tar.gz
-# Source0-md5:	4a806bc7215d722967d403c35412becd
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
+# Source0-md5:	b442fa2cc217f9d5fcfdaeedaa7225be
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-less_verbose.patch
 Patch2:		%{name}-reconnect_on_dbus_exit.patch
+Patch3:		%{name}-eject_path.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dbus-glib-devel >= 0.33
+BuildRequires:	dbus-glib-devel >= 0.36
 BuildRequires:	hal-devel >= 0.5.0
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libgnomeui-devel >= 2.12.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
-Requires:	dbus >= 0.33
+Requires:	dbus >= 0.36
 Requires:	eject
-Requires:	hal >= 0.5.3-1
+Requires:	hal >= 0.5.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,6 +50,7 @@ dzia³a w przestrzeni u¿ytkownika.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
