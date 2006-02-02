@@ -1,3 +1,21 @@
+diff -aurN gnome-volume-manager-1.5.12.orig/gnome-volume-manager.desktop.in gnome-volume-manager-1.5.12/gnome-volume-manager.desktop.in
+--- gnome-volume-manager-1.5.12.orig/gnome-volume-manager.desktop.in	1970-01-01 01:00:00.000000000 +0100
++++ gnome-volume-manager-1.5.12/gnome-volume-manager.desktop.in	2006-02-02 17:47:03.000000000 +0100
+@@ -0,0 +1,14 @@
++[Desktop Entry]
++Encoding=UTF-8
++_Name=Volume Manager
++_Comment=Volume manager for removable drives and media
++Icon=gnome-dev-cdrom
++Exec=gnome-volume-manager --sm-disable
++Terminal=false
++Type=Application
++Categories=
++OnlyShowIn=GNOME;
++X-GNOME-Bugzilla-Bugzilla=GNOME
++X-GNOME-Bugzilla-Product=gnome-volume-manager
++X-GNOME-Bugzilla-Component=general
++X-GNOME-Autostart-enabled=true
 diff -aurN gnome-volume-manager-1.5.12.orig/gnome-volume-properties.desktop.in gnome-volume-manager-1.5.12/gnome-volume-properties.desktop.in
 --- gnome-volume-manager-1.5.12.orig/gnome-volume-properties.desktop.in	2006-01-24 22:14:02.000000000 +0100
 +++ gnome-volume-manager-1.5.12/gnome-volume-properties.desktop.in	2006-02-02 17:42:55.104276000 +0100
