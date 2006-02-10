@@ -1,12 +1,12 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	1.5.12
+Version:	1.5.13
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
-# Source0-md5:	8d053325a492896dc0204acf029aef2c
+# Source0-md5:	5bdfcb575867006aa72aa15f2adf6f82
 Patch0:		%{name}-desktop.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
