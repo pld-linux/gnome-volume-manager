@@ -1,0 +1,21 @@
+diff -aurN gnome-volume-manager-1.5.13.orig/src/manager.c gnome-volume-manager-1.5.13/src/manager.c
+--- gnome-volume-manager-1.5.13.orig/src/manager.c	2006-02-10 23:02:35.000000000 +0100
++++ gnome-volume-manager-1.5.13/src/manager.c	2006-02-11 11:54:14.936100728 +0100
+@@ -2896,16 +2896,7 @@
+ static gboolean
+ gvm_user_at_console (void)
+ {
+-	static unsigned int exists = 0;
+-	char *path;
+-	
+-	if (!(exists & 0x2)) {
+-		path = g_build_filename (GVM_CONSOLE_AUTH_DIR, g_get_user_name (), NULL);
+-		exists = (access (path, F_OK) == 0) ? 0x3 : 0x2;
+-		g_free (path);
+-	}
+-	
+-	return (exists & 0x1);
++	return TRUE;
+ }
+ 
+ /* checks that the user's session is the active session at the console */
