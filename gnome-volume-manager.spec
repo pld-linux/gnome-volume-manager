@@ -2,7 +2,7 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.5.13
-Release:	3
+Release:	3.1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
@@ -47,7 +47,7 @@ dzia³a w przestrzeni u¿ytkownika.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 %build
 %{__glib_gettextize}
@@ -58,7 +58,8 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-schemas-install
+	--disable-schemas-install \
+	--with-console-auth-dir=%{_localstatedir}/lock/console/
 %{__make}
 
 %install
