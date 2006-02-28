@@ -2,7 +2,7 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.5.14
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
@@ -67,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
-	autostartdir="/etc/xdg/autostart"
+	autostartdir=%{_datadir}/gnome/autostart
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
-/etc/xdg/autostart/*.desktop
+%{_datadir}/gnome/autostart/*.desktop
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
 %{_sysconfdir}/gconf/schemas/gnome-volume-manager.schemas
