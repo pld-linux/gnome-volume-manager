@@ -1,0 +1,11 @@
+diff -aurN gnome-volume-manager-1.5.14.orig/src/manager.c gnome-volume-manager-1.5.14/src/manager.c
+--- gnome-volume-manager-1.5.14.orig/src/manager.c	2006-02-27 16:44:37.000000000 +0100
++++ gnome-volume-manager-1.5.14/src/manager.c	2006-03-01 22:49:07.841994704 +0100
+@@ -2805,7 +2805,6 @@
+ 	g_source_remove (statfs_id);
+ 	statfs_id = 0;
+ 	
+-	g_hash_table_destroy (statfs_mounts);
+ #endif
+ 
+ 	gtk_main_quit ();
