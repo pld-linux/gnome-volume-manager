@@ -1,16 +1,13 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	1.5.4
+Version:	1.5.15
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
-# Source0-md5:	43897852ab33e48a3ac1a8d36a0435f1
+# Source0-md5:	dd17711c55ec63af04cfe306926cfcd5
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-less_verbose.patch
-Patch2:		%{name}-reconnect_on_dbus_exit.patch
-Patch3:		%{name}-eject_path.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -19,14 +16,15 @@ BuildRequires:	dbus-glib-devel >= 0.36
 BuildRequires:	hal-devel >= 0.5.0
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeui-devel >= 2.12.0
+BuildRequires:	libgnomeui-devel >= 2.14.0
+BuildRequires:	libnotify-devel >= 0.3.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.36
-Requires:	eject
 Requires:	hal >= 0.5.4
+Requires:	notification-daemon >= 0.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,9 +46,6 @@ dzia³a w przestrzeni u¿ytkownika.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -61,7 +56,8 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-schemas-install
+	--disable-schemas-install \
+	--with-console-auth-dir=%{_localstatedir}/lock/console/
 %{__make}
 
 %install
@@ -69,7 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
+	autostartdir=%{_datadir}/gnome/autostart
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
@@ -88,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
+%{_datadir}/gnome/autostart/*.desktop
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
 %{_sysconfdir}/gconf/schemas/gnome-volume-manager.schemas
