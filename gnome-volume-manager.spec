@@ -2,28 +2,32 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.5.15
-Release:	1
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
 # Source0-md5:	dd17711c55ec63af04cfe306926cfcd5
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-defaults.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dbus-glib-devel >= 0.36
-BuildRequires:	hal-devel >= 0.5.0
+BuildRequires:	dbus-glib-devel >= 0.60
+BuildRequires:	hal-devel >= 0.5.7
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeui-devel >= 2.12.0
-BuildRequires:	libnotify-devel >= 0.3.0
+BuildRequires:	libgnomeui-devel >= 2.14.0
+BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
-Requires:	dbus >= 0.36
-Requires:	hal >= 0.5.4
+Requires:	dbus >= 0.60
+Requires:	eject
+Requires:	gnome-mount
+Requires:	hal >= 0.5.7
+Requires:	libgnomeui >= 2.14.0
 Requires:	notification-daemon >= 0.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,6 +50,7 @@ dzia³a w przestrzeni u¿ytkownika.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__glib_gettextize}
