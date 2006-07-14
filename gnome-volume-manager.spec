@@ -2,7 +2,7 @@ Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	1.5.15
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
@@ -13,21 +13,21 @@ URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dbus-glib-devel >= 0.60
+BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	hal-devel >= 0.5.7
 BuildRequires:	intltool >= 0.35
-BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeui-devel >= 2.15.1
-BuildRequires:	libnotify-devel >= 0.4.0
+BuildRequires:	libglade2-devel >= 1:2.6.0
+BuildRequires:	libgnomeui-devel >= 2.15.2
+BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
-Requires:	dbus >= 0.60
+Requires:	dbus >= 0.62
 Requires:	eject
 Requires:	gnome-mount
 Requires:	hal >= 0.5.7
-Requires:	libgnomeui >= 2.15.1
+Requires:	libgnomeui >= 2.15.2
 Requires:	notification-daemon >= 0.3.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -60,6 +60,7 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__autoheader}
 %{__autoconf}
 %{__automake}
+LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--disable-schemas-install \
 	--with-console-auth-dir=%{_localstatedir}/lock/console/
