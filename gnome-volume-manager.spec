@@ -1,12 +1,12 @@
 Summary:	The GNOME Volume Manager
 Summary(pl):	Zarz±dca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	1.5.15
-Release:	5
+Version:	2.15.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/1.5/%{name}-%{version}.tar.gz
-# Source0-md5:	dd17711c55ec63af04cfe306926cfcd5
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/2.15/%{name}-%{version}.tar.bz2
+# Source0-md5:	d723bc2069fd19cf1c31961fbc1cf3c8
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-defaults.patch
 URL:		http://www.gnome.org/
@@ -14,10 +14,10 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.62
-BuildRequires:	hal-devel >= 0.5.7
+BuildRequires:	hal-devel >= 0.5.7.1
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.15.2
+BuildRequires:	libgnomeui-devel >= 2.15.90
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -26,8 +26,8 @@ Requires(post,preun):	GConf2
 Requires:	dbus >= 0.62
 Requires:	eject
 Requires:	gnome-mount
-Requires:	hal >= 0.5.7
-Requires:	libgnomeui >= 2.15.2
+Requires:	hal >= 0.5.7.1
+Requires:	libgnomeui >= 2.15.90
 Requires:	notification-daemon >= 0.3.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -60,7 +60,6 @@ dzia³a w przestrzeni u¿ytkownika.
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--disable-schemas-install \
 	--with-console-auth-dir=%{_localstatedir}/lock/console/
@@ -74,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
 	autostartdir=%{_datadir}/gnome/autostart
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
+#rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
 
