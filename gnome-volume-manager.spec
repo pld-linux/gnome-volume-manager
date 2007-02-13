@@ -1,5 +1,5 @@
 Summary:	The GNOME Volume Manager
-Summary(pl.UTF-8):   Zarządca woluminów dla GNOME
+Summary(pl.UTF-8):	Zarządca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	2.17.0
 Release:	1
