@@ -2,7 +2,7 @@ Summary:	The GNOME Volume Manager
 Summary(pl.UTF-8):	Zarządca woluminów dla GNOME
 Name:		gnome-volume-manager
 Version:	2.17.0
-Release:	1
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/2.17/%{name}-%{version}.tar.bz2
@@ -29,6 +29,8 @@ Requires:	gnome-mount
 Requires:	hal >= 0.5.7.1
 Requires:	libgnomeui >= 2.15.91
 Requires:	notification-daemon >= 0.3.5
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -73,8 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
 	autostartdir=%{_datadir}/gnome/autostart
 
-#rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
-
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name}
 
 %clean
