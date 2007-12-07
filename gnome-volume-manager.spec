@@ -1,33 +1,34 @@
 Summary:	The GNOME Volume Manager
 Summary(pl.UTF-8):	Zarządca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	2.17.0
-Release:	3
+Version:	2.22.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-volume-manager/2.17/%{name}-%{version}.tar.bz2
-# Source0-md5:	104cec26e721e0bba69debd392367195
-Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-defaults.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/2.22/%{name}-%{version}.tar.bz2
+# Source0-md5:	f84e2d72d494a5bbee8d2685f6ad7b11
+Patch0:		%{name}-defaults.patch
+Patch1:		%{name}-po.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.71
-BuildRequires:	hal-devel >= 0.5.7.1
+BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.35
-BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.15.91
+BuildRequires:	libglade2-devel >= 1:2.6.2
+BuildRequires:	libgnomeui-devel >= 2.20.1
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	sed >= 4.0
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.91
 Requires:	eject
 Requires:	gnome-mount
-Requires:	hal >= 0.5.7.1
-Requires:	libgnomeui >= 2.15.91
+Requires:	hal >= 0.5.10
+Requires:	libgnomeui >= 2.20.1
 Requires:	notification-daemon >= 0.3.5
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -54,6 +55,9 @@ działa w przestrzeni użytkownika.
 %patch0 -p1
 %patch1 -p1
 
+sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
+mv -f po/sr@{Latn,latin}.po
+
 %build
 %{__glib_gettextize}
 %{__libtoolize}
@@ -75,8 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
 	autostartdir=%{_datadir}/gnome/autostart
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name}
 
 %clean
@@ -92,6 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/gnome-volume-manager
 %{_datadir}/gnome/autostart/*.desktop
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
