@@ -1,0 +1,12 @@
+diff -urN gnome-volume-manager-2.22.0/po/pl.po gnome-volume-manager-2.22.0.new/po/pl.po
+--- gnome-volume-manager-2.22.0/po/pl.po	2007-10-18 12:29:45.000000000 +0200
++++ gnome-volume-manager-2.22.0.new/po/pl.po	2007-12-07 17:23:54.000000000 +0100
+@@ -520,7 +520,7 @@
+ 
+ #: ../gnome-volume-properties.glade.h:10
+ msgid "<b>Portable Music Players</b>"
+-msgstr "<p>Przenośne odtwarzacze muzyki</b>"
++msgstr "<b>Przenośne odtwarzacze muzyki</b>"
+ 
+ #: ../gnome-volume-properties.glade.h:11
+ msgid "<b>Printers</b>"
