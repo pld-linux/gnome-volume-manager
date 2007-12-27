@@ -1,16 +1,16 @@
-diff -aurN gnome-volume-manager-1.5.15.orig/gnome-volume-manager.schemas.in gnome-volume-manager-1.5.15/gnome-volume-manager.schemas.in
---- gnome-volume-manager-1.5.15.orig/gnome-volume-manager.schemas.in	2006-03-10 17:59:17.000000000 +0100
-+++ gnome-volume-manager-1.5.15/gnome-volume-manager.schemas.in	2006-05-21 12:09:53.387120008 +0200
-@@ -76,7 +76,7 @@
+diff -urN gnome-volume-manager-2.22.0/gnome-volume-manager.schemas.in gnome-volume-manager-2.22.0.new/gnome-volume-manager.schemas.in
+--- gnome-volume-manager-2.22.0/gnome-volume-manager.schemas.in	2007-11-02 02:55:30.000000000 +0100
++++ gnome-volume-manager-2.22.0.new/gnome-volume-manager.schemas.in	2007-12-27 01:52:11.000000000 +0100
+@@ -109,7 +109,7 @@
          <key>/schemas/desktop/gnome/volume_manager/autoplay_cda_command</key>
  	<applyto>/desktop/gnome/volume_manager/autoplay_cda_command</applyto>
  	<type>string</type>
--	<default>totem %d</default>
+-	<default>gnome-cd --unique --play --device=%d</default>
 +	<default>sound-juicer -d %d</default>
  	<locale name="C">
  	  <short>CD play command</short>
  	  <long>Command to run when an audio CD is inserted.</long>
-@@ -133,7 +133,7 @@
+@@ -166,7 +166,7 @@
          <key>/schemas/desktop/gnome/volume_manager/autoplay_dvd_command</key>
  	<applyto>/desktop/gnome/volume_manager/autoplay_dvd_command</applyto>
  	<type>string</type>
@@ -19,7 +19,7 @@ diff -aurN gnome-volume-manager-1.5.15.orig/gnome-volume-manager.schemas.in gnom
  	<locale name="C">
  	  <short>DVD play command</short>
  	  <long>Command to run when a video DVD is inserted.</long>
-@@ -204,7 +204,7 @@
+@@ -237,7 +237,7 @@
          <key>/schemas/desktop/gnome/volume_manager/autoipod_command</key>
  	<applyto>/desktop/gnome/volume_manager/autoipod_command</applyto>
  	<type>string</type>
@@ -28,7 +28,7 @@ diff -aurN gnome-volume-manager-1.5.15.orig/gnome-volume-manager.schemas.in gnom
  	<locale name="C">
  	  <short>iPod sync command</short>
  	  <long>Command to run when an iPod is connected.</long>
-@@ -250,7 +250,7 @@
+@@ -283,7 +283,7 @@
          <key>/schemas/desktop/gnome/volume_manager/autoscanner_command</key>
  	<applyto>/desktop/gnome/volume_manager/autoscanner_command</applyto>
  	<type>string</type>
