@@ -1,14 +1,13 @@
 Summary:	The GNOME Volume Manager
 Summary(pl.UTF-8):	Zarządca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	2.22.1
+Version:	2.22.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	a0cb86f541515f33443c848879d04785
+# Source0-md5:	09a3f020478caad6c0e54f291488a6b0
 Patch0:		%{name}-defaults.patch
-Patch1:		%{name}-po.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -17,7 +16,7 @@ BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.20.1
+BuildRequires:	libgnomeui-devel >= 2.22.1
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -28,7 +27,7 @@ Requires:	dbus >= 0.91
 Requires:	eject
 Requires:	gnome-mount
 Requires:	hal >= 0.5.10
-Requires:	libgnomeui >= 2.20.1
+Requires:	libgnomeui >= 2.22.1
 Requires:	notification-daemon >= 0.3.5
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -53,7 +52,6 @@ działa w przestrzeni użytkownika.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
 mv -f po/sr@{Latn,latin}.po
