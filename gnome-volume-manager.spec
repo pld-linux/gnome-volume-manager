@@ -1,33 +1,33 @@
 Summary:	The GNOME Volume Manager
 Summary(pl.UTF-8):	Zarządca woluminów dla GNOME
 Name:		gnome-volume-manager
-Version:	2.22.5
+Version:	2.24.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	e761a5bdc8867419eb278c9e1a6a79ff
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-volume-manager/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	a8ae620c2633f3ac13444736ef61122a
 Patch0:		%{name}-defaults.patch
 URL:		http://www.gnome.org/
-BuildRequires:	GConf2-devel
+BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.71
+BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	hal-devel >= 0.5.10
-BuildRequires:	intltool >= 0.35
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.22.1
+BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libnotify-devel >= 0.4.2
-BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
-BuildRequires:	sed >= 4.0
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.91
 Requires:	eject
 Requires:	gnome-mount
 Requires:	hal >= 0.5.10
-Requires:	libgnomeui >= 2.22.1
+Requires:	libgnomeui >= 2.24.0
 Requires:	notification-daemon >= 0.3.5
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -53,12 +53,8 @@ działa w przestrzeni użytkownika.
 %setup -q
 %patch0 -p1
 
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv -f po/sr@{Latn,latin}.po
-
 %build
 %{__glib_gettextize}
-%{__libtoolize}
 %{__intltoolize}
 %{__aclocal}
 %{__autoheader}
@@ -74,8 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
-	autostartdir=%{_datadir}/gnome/autostart
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 %find_lang %{name}
 
@@ -93,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gnome-volume-properties
 %attr(755,root,root) %{_libdir}/gnome-volume-manager
-%{_datadir}/gnome/autostart/gnome-volume-manager.desktop
+%{_sysconfdir}/xdg/autostart/gnome-volume-manager.desktop
 %{_datadir}/%{name}
 %{_desktopdir}/gnome-volume-properties.desktop
 %{_sysconfdir}/gconf/schemas/gnome-volume-manager.schemas
