@@ -24,11 +24,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
 Requires:	dbus >= 0.91
+Requires:	dbus(org.freedesktop.Notifications)
 Requires:	eject
 Requires:	gnome-mount
 Requires:	hal >= 0.5.10
 Requires:	libgnomeui >= 2.24.0
-Requires:	notification-daemon >= 0.3.5
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
